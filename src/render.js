@@ -19,9 +19,11 @@ function startRecording() {
         console.log("undefined media recorder")
     } else {
         console.log("start recording")
+        startButton.style.display = "none"
+        stopButton.style.display = "block"
         mediaRecorder.start();
-        startButton.classList.add('is-danger');
-        startButton.innerText = 'Recording';
+        stopButton.classList.add('is-danger');
+        startButton.innerText = 'Recording in progress..';
     }
 }
 
@@ -30,9 +32,11 @@ function stopRecording() {
         console.log("undefined media recorder")
     } else {
         console.log("stop recording")
+        stopButton.style.display = "none"
+        startButton.style.display = "block"
         mediaRecorder.stop();
         startButton.classList.remove('is-danger');
-        startButton.innerText = 'Start';
+        startButton.innerText = 'Start Recording';
     }
 }
 
@@ -70,6 +74,8 @@ async function selectVideoSource(source) {
 
     video.srcObject = stream
     video.play()
+
+    startButton.style.display = "block"
 
     const options = { mimeType: 'video/webm; codecs=vp9' }
     mediaRecorder = new MediaRecorder(stream, options)

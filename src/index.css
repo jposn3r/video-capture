@@ -4,3 +4,11 @@ body {
   max-width: 38rem;
   padding: 2rem;
 }
+
+#startButton {
+  display: none
+}
+
+#stopButton {
+  display: none
+}
