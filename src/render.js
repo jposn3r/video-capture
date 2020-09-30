@@ -15,9 +15,29 @@ async function getVideoSources() {
         inputSources.map(source => {
             return {
                 label: source.name,
-                click: () => selectSource(source)
+                click: () => selectVideoSource(source)
             }
         })
     )
     videoOptionsMenu.popup([])
+}
+
+async function selectVideoSource(source) {
+    videoSelectButton.text = source.name
+
+    const constraints = {
+        audio:false,
+        video: {
+            mandatory: {
+                chromeMediaSource: 'desktop',
+                chromeMediaSourceId: source.id
+            }
+        }
+    }
+
+    const stream = await navigator.mediaDevices
+        .getUserMedia(constraints);
+
+    video.srcObject = stream
+    video.play()
 }
